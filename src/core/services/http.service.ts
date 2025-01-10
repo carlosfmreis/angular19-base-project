@@ -8,35 +8,54 @@ export abstract class AppHttpBaseService {
 
   abstract client: HttpClient;
 
+  private resolveUrl(endpoint: string, baseUrlOverride?: string): string {
+    const baseUrl: string = baseUrlOverride || this.baseUrl;
+    return `${baseUrl}${endpoint}`;
+  }
+
   get<T>(params: AppHttpServiceParams<void>): Observable<T> {
-    return this.client.get<T>(params.endpoint, {
-      params: params.httpParams,
-    });
+    return this.client.get<T>(
+      this.resolveUrl(params.endpoint, params.baseUrlOverride),
+      {
+        params: params.httpParams,
+      }
+    );
   }
 
   post<T, Z>(params: AppHttpServiceParams<Z>): Observable<T> {
-    return this.client.post<T>(params.endpoint, params.body, {
-      params: params.httpParams,
-    });
+    return this.client.post<T>(
+      this.resolveUrl(params.endpoint, params.baseUrlOverride),
+      params.body,
+      {
+        params: params.httpParams,
+      }
+    );
   }
 
   put<T, Z>(params: AppHttpServiceParams<Z>): Observable<T> {
-    return this.client.put<T>(params.endpoint, params.body, {
-      params: params.httpParams,
-    });
+    return this.client.put<T>(
+      this.resolveUrl(params.endpoint, params.baseUrlOverride),
+      params.body,
+      {
+        params: params.httpParams,
+      }
+    );
   }
 
   delete<T>(params: AppHttpServiceParams<void>): Observable<T> {
-    return this.client.delete<T>(params.endpoint, {
-      params: params.httpParams,
-    });
+    return this.client.delete<T>(
+      this.resolveUrl(params.endpoint, params.baseUrlOverride),
+      {
+        params: params.httpParams,
+      }
+    );
   }
 }
 
 @Injectable()
 export class AppHttpService extends AppHttpBaseService {
   // TODO: set API base url
-  override baseUrl: string = '';
+  override baseUrl: string = 'http://localhost:8888';
 
   override client: HttpClient = inject(HttpClient);
 }

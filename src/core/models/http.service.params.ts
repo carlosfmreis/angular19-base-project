@@ -4,4 +4,5 @@ export interface AppHttpServiceParams<T> {
   endpoint: string;
   body?: T;
   httpParams?: HttpParams;
+  baseUrlOverride?: string;
 }
