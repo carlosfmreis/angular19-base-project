@@ -2,8 +2,17 @@ import {
   ApplicationConfig,
   provideExperimentalZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
+import { provideRouter, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/cat-facts/cat-facts.module').then(
+        (m) => m.AppCatFactsModule
+      ),
+  },
+];
 
 export const appConfig: ApplicationConfig = {
   providers: [

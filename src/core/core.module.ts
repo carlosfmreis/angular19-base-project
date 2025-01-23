@@ -3,7 +3,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { AppHttpErrorInterceptor } from './interceptors/http.error.interceptor';
 import { AppHttpTokenInterceptor } from './interceptors/http.token.interceptor';
-import { AppHttpService } from './services/http.service';
 import { AppErrorHandler } from './services/error-handler.service';
 import { DayjsFormatPipe } from './pipes/dayjs-format.pipe';
 
@@ -25,7 +24,6 @@ import { DayjsFormatPipe } from './pipes/dayjs-format.pipe';
       provide: ErrorHandler,
       useClass: AppErrorHandler,
     },
-    AppHttpService,
   ],
 })
 export class AppCoreModule {}

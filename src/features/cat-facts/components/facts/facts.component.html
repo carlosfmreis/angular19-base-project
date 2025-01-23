@@ -1,0 +1,4 @@
+<h1>Cat Facts Feature</h1>
+@if (facts()) {
+<p *ngFor="let fact of facts()?.data">{{ fact.fact }}</p>
+}

@@ -4,9 +4,8 @@ import { AppHttpServiceParams } from '../models/http.service.params';
 import { Observable } from 'rxjs';
 
 export abstract class AppHttpBaseService {
-  abstract baseUrl: string;
-
-  abstract client: HttpClient;
+  abstract readonly baseUrl: string;
+  abstract readonly client: HttpClient;
 
   private resolveUrl(endpoint: string, baseUrlOverride?: string): string {
     const baseUrl: string = baseUrlOverride || this.baseUrl;
@@ -50,12 +49,4 @@ export abstract class AppHttpBaseService {
       }
     );
   }
-}
-
-@Injectable()
-export class AppHttpService extends AppHttpBaseService {
-  // TODO: set API base url
-  override baseUrl: string = 'http://localhost:8888';
-
-  override client: HttpClient = inject(HttpClient);
 }
