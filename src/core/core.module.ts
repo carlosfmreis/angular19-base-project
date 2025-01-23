@@ -5,9 +5,11 @@ import { AppHttpErrorInterceptor } from './interceptors/http.error.interceptor';
 import { AppHttpTokenInterceptor } from './interceptors/http.token.interceptor';
 import { AppHttpService } from './services/http.service';
 import { AppErrorHandler } from './services/error-handler.service';
+import { DayjsFormatPipe } from './pipes/dayjs-format.pipe';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, DayjsFormatPipe],
+  exports: [DayjsFormatPipe],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
