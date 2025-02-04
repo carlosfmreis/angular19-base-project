@@ -3,12 +3,14 @@ networks:
 
 services:
   angular-app:
-    build: .
+    image: node:lts-alpine
+    working_dir: /app
     ports:
       - "4200:4200"
     volumes:
-      - .:/app
+      - ./:/app
       - /app/node_modules
+    command: sh -c "yarn install && yarn start"
     environment:
       - NODE_ENV=development
     networks:
